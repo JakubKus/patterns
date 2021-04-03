@@ -1,6 +1,5 @@
-interface CoffeeFactory {
+interface CoffeeDeviceFactory {
   createCoffeeMachine(): AbstractCoffeeMachine;
-  createAltBrewers(): AbstractAlternativeCoffee;
 }
 
 interface AbstractCoffeeMachine {
@@ -8,32 +7,13 @@ interface AbstractCoffeeMachine {
   brewCappuccino(): string;
 }
 
-interface AbstractAlternativeCoffee {
-  brewFrenchPressCoffee(): string;
-  brewDripCoffee(): string;
-}
-
-class Home implements CoffeeFactory {
+class HomeCoffeeFactory implements CoffeeDeviceFactory {
   createCoffeeMachine(): AbstractCoffeeMachine {
-    return new HomeExpress();
-  }
-
-  createAltBrewers(): AbstractAlternativeCoffee {
-    return new HomeAltBrewers();
+    return new HomeCoffeeMachine();
   }
 }
 
-class Cafe implements CoffeeFactory {
-  createCoffeeMachine(): AbstractCoffeeMachine {
-    return new CafeExpress();
-  }
-
-  createAltBrewers(): AbstractAlternativeCoffee {
-    return new CafeAltBrewers();
-  }
-}
-
-class HomeExpress implements AbstractCoffeeMachine {
+class HomeCoffeeMachine implements AbstractCoffeeMachine {
   brewEspresso(): string {
     return 'Espresso brewed at home';
   }
@@ -43,71 +23,46 @@ class HomeExpress implements AbstractCoffeeMachine {
   }
 }
 
-class CafeExpress implements AbstractCoffeeMachine {
+class CafeCoffeeFactory implements CoffeeDeviceFactory {
+  createCoffeeMachine(): AbstractCoffeeMachine {
+    return new CafeCoffeeMachine();
+  }
+}
+
+class CafeCoffeeMachine implements AbstractCoffeeMachine {
   brewEspresso(): string {
-    return 'Espresso from coffee machine brewed in a cafe';
+    return 'Espresso brewed in a cafe';
   }
 
   brewCappuccino(): string {
-    return 'Cappuccino from coffee machine brewed in a cafe';
+    return 'Cappuccino brewed in a cafe';
   }
 }
 
-class HomeAltBrewers implements AbstractAlternativeCoffee {
-  brewFrenchPressCoffee(): string {
-    return 'Coffee from french press brewed at home';
-  }
+const toOrderedString = (...items: string[]) => items.map((x, i) => `${i + 1}. ${x}`).join('\n');
 
-  brewDripCoffee(): string {
-    return 'Coffee from drip brewed at home';
-  }
-}
+const brewCoffees = (coffeeDeviceFactory: CoffeeDeviceFactory) => {
+  const coffeeMachine = coffeeDeviceFactory.createCoffeeMachine();
+  const coffeeMachineCoffees = toOrderedString(coffeeMachine.brewEspresso(), coffeeMachine.brewCappuccino());
 
-class CafeAltBrewers implements AbstractAlternativeCoffee {
-  brewFrenchPressCoffee(): string {
-    return 'Coffee from french press brewed in a cafe';
-  }
-
-  brewDripCoffee(): string {
-    return 'Coffee from drip brewed in a cafe';
-  }
-}
-
-const coffee = (coffeeFactory: CoffeeFactory) => {
-  const toOrderedString = (...items: string[]) => items.map((x, i) => `${i + 1}. ${x}`).join('\n');
-  const coffeeMachine = coffeeFactory.createCoffeeMachine();
-  const altBrewers = coffeeFactory.createAltBrewers();
-
-  const expressCoffees = toOrderedString(coffeeMachine.brewEspresso(), coffeeMachine.brewCappuccino());
-  console.log(`Coffees from coffee machine:\n${expressCoffees}`);
-
-  const frenchPressCoffees = toOrderedString(altBrewers.brewFrenchPressCoffee(), altBrewers.brewDripCoffee());
-  console.log(`Coffees using alternative methods:\n${frenchPressCoffees}`);
+  console.log(coffeeMachineCoffees);
 };
 
-console.log('[Brewing coffee at home]');
-coffee(new Home());
+console.log('[Brewing coffees at home]');
+brewCoffees(new HomeCoffeeFactory());
 
 console.log('');
 
-console.log('[Getting coffee in a cafe]');
-coffee(new Cafe());
+console.log('[Getting coffees in a cafe]');
+brewCoffees(new CafeCoffeeFactory());
 
 /*
  Result:
- [Brewing coffee at home]
- Coffees from coffee machine:
+ [Brewing coffees at home]
  1. Espresso brewed at home
  2. Cappuccino brewed at home
- Coffees using alternative methods:
- 1. Coffee from french press brewed at home
- 2. Coffee from drip brewed at home
 
- [Getting coffee in a cafe]
- Coffees from coffee machine:
- 1. Espresso from coffee machine brewed in a cafe
- 2. Cappuccino from coffee machine brewed in a cafe
- Coffees using alternative methods:
- 1. Coffee from french press brewed in a cafe
- 2. Coffee from drip brewed in a cafe
+ [Getting coffees in a cafe]
+ 1. Espresso brewed in a cafe
+ 2. Cappuccino brewed in a cafe
 */
