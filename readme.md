@@ -8,7 +8,7 @@ Table of contents:
   - [Abstract factory](https://github.com/jakubkus/patterns/blob/master/creational/abstract-factory.ts)
   - [Builder](https://github.com/jakubkus/patterns/blob/master/creational/builder.ts)
   - [Factory Method](https://github.com/jakubkus/patterns/blob/master/creational/factory-method.ts)
-  - Prototype
+  - [Prototype](https://github.com/jakubkus/patterns/blob/master/creational/prototype.ts)
   - Singleton
 - Structural
   - Adapter
