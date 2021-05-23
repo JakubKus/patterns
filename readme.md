@@ -7,7 +7,7 @@ Table of contents:
 - Creational
   - [Abstract factory](https://github.com/jakubkus/patterns/blob/master/creational/abstract-factory.ts)
   - [Builder](https://github.com/jakubkus/patterns/blob/master/creational/builder.ts)
-  - Factory Method
+  - [Factory Method](https://github.com/jakubkus/patterns/blob/master/creational/factory-method.ts)
   - Prototype
   - Singleton
 - Structural
