@@ -9,7 +9,7 @@ Table of contents:
   - [Builder](https://github.com/jakubkus/patterns/blob/master/creational/builder.ts)
   - [Factory Method](https://github.com/jakubkus/patterns/blob/master/creational/factory-method.ts)
   - [Prototype](https://github.com/jakubkus/patterns/blob/master/creational/prototype.ts)
-  - Singleton
+  - [Singleton](https://github.com/jakubkus/patterns/blob/master/creational/singleton.ts)
 - Structural
   - Adapter
   - Bridge
